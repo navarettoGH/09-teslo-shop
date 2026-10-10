@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ProductCard } from '../../../products/components/product-card/product-card';
+import { ProductsService } from '../../../products/services/products.service';
+import { rxResource } from '@angular/core/rxjs-interop';
 
 
 @Component({
@@ -8,4 +10,15 @@ import { ProductCard } from '../../../products/components/product-card/product-c
   templateUrl: './home-page.html',
   changeDetection: ChangeDetectionStrategy.Eager,
 })
-export class HomePage {}
+export class HomePage {
+
+  productsService = inject(ProductsService);
+
+  productsResource = rxResource({
+    params: () => ({}),
+    stream:({params}) => {
+      return this.productsService.getProducts({});
+    }
+  })
+
+}
