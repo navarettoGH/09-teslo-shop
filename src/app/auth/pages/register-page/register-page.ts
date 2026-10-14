@@ -37,6 +37,7 @@ export class RegisterPage {
     this.authService.register(fullName! ,email!, password!).subscribe(isSucces => {
 
       if(isSucces){
+        this.authService.logout()
         this.router.navigateByUrl('/auth/login');
         return;
       }
