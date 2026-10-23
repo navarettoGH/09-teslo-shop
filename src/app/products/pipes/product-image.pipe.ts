@@ -10,7 +10,11 @@ const placeHolder = "./assets/images/no-image.jpg"
 })
 
 export class ProductImagePipe implements PipeTransform {
-  transform(value: string | string[]): any {
+  transform(value:null | string | string[]): any {
+
+    if( value == null){
+      return placeHolder;
+    }
 
     if(typeof value == 'string') return `${baseUrl}/files/product/${ value }`
 
