@@ -16,6 +16,10 @@ export class ProductImagePipe implements PipeTransform {
       return placeHolder;
     }
 
+    if( typeof value == 'string' && value.startsWith('blob:') ) {
+      return value;
+    }
+
     if(typeof value == 'string') return `${baseUrl}/files/product/${ value }`
 
     const image = value.at(0);
